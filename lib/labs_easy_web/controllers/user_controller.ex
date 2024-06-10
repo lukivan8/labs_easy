@@ -14,7 +14,7 @@ defmodule LabsEasyWeb.UserController do
         |> put_status(:unprocessable_entity)
         |> render(:error, changeset: changeset)
 
-      {:error, changeset} ->
+      {:error, _changeset} ->
         conn
         |> resp(422, "Nah")
     end
