@@ -14,6 +14,7 @@ config :labs_easy, LabsEasy.Repo,
   password: "postgres",
   hostname: "localhost",
   database: "labs_easy",
+  port: 5433,
   stacktrace: true,
   pool_size: 10
 
