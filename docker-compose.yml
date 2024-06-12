@@ -1,0 +1,33 @@
+services:
+  db:
+    image: postgres
+    restart: always
+    container_name: database
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+    environment: # Used by the postgres image to setup a default user. For security reason, you should avoid using the postgres user
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: labs_easy
+
+  app:
+    container_name: labs_easy-app
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - db
+    ports: # Docker need to expose ports for you to access your app.
+      - 4000:4000
+    env_file: # Load environment variables from a file
+      - .env
+    environment:
+      DATABASE_URL: ecto://postgres:postgres@db/labs_easy
+      PASS_SECRET: NWTa4NubtzK2uXV9He0hkZrBNfGjIB # Can literally be anything, but generally generated randomly by tools like mix phx.gen.secret
+      SECRET_KEY_BASE: HtB7zqLxkV3f2tPEK12NGrqQeA61Fbm1TPwNyQdv/6rem2+H+HYNdotd81yZGXQh
+      PASS_SEED: user token
+
+volumes:
+  pg-data:
+    external: true # Must use "docker volume create --name=pg-data before

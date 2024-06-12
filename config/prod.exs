@@ -9,14 +9,5 @@ config :swoosh, local: false
 # Do not print debug messages in production
 config :logger, level: :info
 
-config :labs_easy, LabsEasy.Repo,
-  username: "postgres",
-  password: "postgres",
-  hostname: "localhost",
-  database: "labs_easy",
-  port: 5433,
-  stacktrace: true,
-  pool_size: 10
-
 # Runtime production configuration, including reading
 # of environment variables, is done on config/runtime.exs.
