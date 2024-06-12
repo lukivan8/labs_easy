@@ -9,6 +9,10 @@ defmodule LabsEasyWeb.Router do
     plug :accepts, ["json"]
   end
 
+  scope "/", LabsEasyWeb do
+    get "/", DefaultController, :index
+  end
+
   scope "/api/v1", LabsEasyWeb do
     pipe_through :api
     resources "/requests", RequestController, except: [:new, :edit]
