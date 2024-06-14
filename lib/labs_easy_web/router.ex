@@ -26,6 +26,8 @@ defmodule LabsEasyWeb.Router do
       pipe_through :authenticate
       get "/", DefaultController, :index
     end
+
+    post "/pre_signed_put", RequestController, :pre_signed_put
   end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development

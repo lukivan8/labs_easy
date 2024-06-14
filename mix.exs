@@ -5,7 +5,7 @@ defmodule LabsEasy.MixProject do
     [
       app: :labs_easy,
       version: "0.1.0",
-      elixir: "~> 1.14",
+      elixir: "~> 1.17",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
@@ -50,7 +50,11 @@ defmodule LabsEasy.MixProject do
       {:bcrypt_elixir, "~> 1.0"},
       {:dotenvy, "~> 0.8.0"},
       {:httpoison, "~> 2.0"},
-      {:poison, "~> 6.0"}
+      {:poison, "~> 6.0"},
+      {:ex_aws, "~> 2.0"},
+      {:ex_aws_s3, "~> 2.0"},
+      {:hackney, "~> 1.9"},
+      {:elixir_uuid, "~> 1.2"}
     ]
   end
 

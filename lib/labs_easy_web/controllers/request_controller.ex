@@ -40,4 +40,28 @@ defmodule LabsEasyWeb.RequestController do
       send_resp(conn, :no_content, "")
     end
   end
+
+  def pre_signed_put(conn, %{"file_name" => fileName}) do
+    opts = [virtual_host: true, bucket_as_host: true]
+    fileName = "#{UUID.uuid4() |> String.split("-") |> List.first()}-#{fileName}"
+
+    {:ok, url} =
+      ExAws.Config.new(:s3)
+      |> ExAws.S3.presigned_url(
+        :put,
+        Application.get_env(:ex_aws, :s3)[:host],
+        fileName,
+        opts
+      )
+
+    send_resp(
+      conn,
+      :ok,
+      :json.encode(%{
+        url: url,
+        get_url:
+          "https://pre-signed-demo-labs.s3.eu-north-1.amazonaws.com/#{URI.encode(fileName)}"
+      })
+    )
+  end
 end
